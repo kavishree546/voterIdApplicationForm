@@ -1,0 +1,111 @@
+<html>
+   <head>
+    <title>voter Id application Form</title> 
+    <style>.error{color: red; font-size:14px;} </style>    
+   </head>
+  <body onload="pageloaded()">
+      <center>
+          <form onsubmit="return validateForm()">
+        <fieldset>
+        <legend>application form</legend>
+          <label>FUll NAME: </label>
+          <input type="text" id="fullname" name="fullname" required><br><br><br>
+          <span id="nameError" style="color:red"></span>
+          <br><label>DOB: </label>
+          <input type="date" id="date" name="dob" required>
+          <label>AGE: </label>
+          <input type="number" id="displayage" readonly><br><br><br>
+          <span id="ageError" style="color:red"></span>
+
+          <label>GENDER: </label>
+          <input type="radio" name="gender">Female
+          <input type="radio" name="gender">Male
+          <input type="radio" name="gender">Others
+          <input type="submit" value="submit">
+          <br><br><br>
+          <label>Phone no</label>
+          <input type="number" id="numberas">
+          <span id="noerror" style="color:red"></span>
+          <input type="submit" value="submit">
+          </fieldset>
+          </form>
+      </center>
+      
+
+  </body>
+  <script>
+function pageloaded(){
+alert("Page Loaded successfully");
+
+}
+function validateForm()
+{
+ let name= document.getElementById("fullname").value.trim();
+ if(!/^[A-Z]+$/.test(name))
+{
+ document.getElementById("nameError").textContent="Name is required in capital and no special characters is alloweded";
+ return false;
+}
+
+}
+//-----------------------function for age----------------------------
+document.getElementById("date").addEventListener("change", calculateAndShowAge);
+function calculateAndShowAge(){
+let dobin = document.getElementById("date").value;
+let ageerror = document.getElementById("ageError");
+let agedisplay=document.getElementById("displayage");
+
+
+ageerror.textContent="";
+if(!dobin)
+{
+ageerror.textContent="please enter dob";
+return false;
+
+}
+
+ let birthdate= new Date(dobin);
+ let today=new Date();
+ let age= today.getFullYear()-birthdate.getFullYear();
+ let month=birthdate.getMonth()-today.getMonth();
+
+if(month<0||month==0&&birthdate.getDate()<today.getDate())
+{
+age--;
+}
+ if(age<=18)
+{
+ageerror.style.color = "red";
+ageerror.textContent="you are not eligible for registration";
+return false;
+
+}
+else{
+agedisplay.value= age;
+ageerror.style.color="green";
+ageerror.textContent="Valid age!";
+return
+}
+;
+
+};
+
+
+
+document.getElementById("numberas").addEventListener("change",validnumber);
+
+function validnumber()
+{
+    let n=document.getElementById("numberas");
+    let error=document.getElementById("noerror");
+    if(n.value.length!==10)
+{
+    error.textContent="invalid number";
+    return false;
+}
+return true;
+}
+</script>
+
+</script>
+</html>
