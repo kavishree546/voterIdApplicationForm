@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Events Form Validation</title>
+    <style>
+        .error { color: red; }
+        .success { color: green; }
+        input { margin-bottom: 5px; }
+    </style>
+</head>
+<body>
+
+<h2>Complete Event-Based Form</h2>
+
+<form id="myForm">
+
+Username:
+<input type="text" id="username">
+<span id="userError" class="error"></span>
+<br><br>
+
+Email:
+<input type="text" id="email">
+<span id="emailError" class="error"></span>
+<br><br>
+
+Password:
+<input type="password" id="password">
+<span id="passError" class="error"></span>
+<br><br>
+
+Confirm Password:
+<input type="password" id="confirmPassword">
+<span id="confirmError" class="error"></span>
+<br><br>
+
+Phone:
+<input type="text" id="phone">
+<span id="phoneError" class="error"></span>
+<br><br>
+
+Age:
+<input type="number" id="age">
+<span id="ageError" class="error"></span>
+<br><br>
+
+<input type="submit" id="submitBtn">
+
+</form>
+
+<script>
+
+// USERNAME EVENTS
+let username = document.getElementById("username");
+
+username.addEventListener("focus", function() {
+    console.log("Username focused");
+});
+
+username.addEventListener("blur", function() {
+    console.log("Username left");
+});
+
+username.addEventListener("keydown", function() {
+    console.log("Key pressed");
+});
+
+username.addEventListener("keyup", function() {
+    if (this.value.length < 3) {
+        document.getElementById("userError").textContent =
+        "Minimum 3 characters required";
+    } else {
+        document.getElementById("userError").textContent = "";
+    }
+});
+
+username.addEventListener("input", function() {
+    console.log("Username input changed");
+});
+
+username.addEventListener("change", function() {
+    console.log("Username value changed and exited");
+});
+
+username.addEventListener("click", function() {
+    console.log("Username clicked");
+});
+
+
+// EMAIL
+document.getElementById("email")
+.addEventListener("blur", function() {
+
+    let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+    if (!emailPattern.test(this.value)) {
+        document.getElementById("emailError").textContent =
+        "Enter valid email";
+    } else {
+        document.getElementById("emailError").textContent = "";
+    }
+
+});
+
+
+// PASSWORD
+document.getElementById("password")
+.addEventListener("input", function() {
+
+    if (this.value.length < 6) {
+        document.getElementById("passError").textContent =
+        "Password must be at least 6 characters";
+    } else {
+        document.getElementById("passError").textContent = "";
+    }
+
+});
+
+
+// CONFIRM PASSWORD
+document.getElementById("confirmPassword")
+.addEventListener("keyup", function() {
+
+    let password = document.getElementById("password").value;
+
+    if (this.value !== password) {
+        document.getElementById("confirmError").textContent =
+        "Passwords do not match";
+    } else {
+        document.getElementById("confirmError").textContent = "";
+    }
+
+});
+
+
+// PHONE (change event example)
+document.getElementById("phone")
+.addEventListener("change", function() {
+
+    let phonePattern = /^[0-9]{10}$/;
+
+    if (!phonePattern.test(this.value)) {
+        document.getElementById("phoneError").textContent =
+        "Enter 10 digit phone number";
+    } else {
+        document.getElementById("phoneError").textContent = "";
+    }
+
+});
+
+
+// AGE
+document.getElementById("age")
+.addEventListener("input", function() {
+
+    if (this.value < 18 || this.value > 60) {
+        document.getElementById("ageError").textContent =
+        "Age must be between 18 and 60";
+    } else {
+        document.getElementById("ageError").textContent = "";
+    }
+
+});
+
+
+// CLICK EVENT ON SUBMIT BUTTON
+document.getElementById("submitBtn")
+.addEventListener("click", function() {
+    console.log("Submit button clicked");
+});
+
+
+// FORM SUBMIT EVENT
+document.getElementById("myForm")
+.addEventListener("submit", function(event) {
+
+    alert("Form Submitted Successfully!");
+
+});
+
+</script>
+
+</body>
+</html>

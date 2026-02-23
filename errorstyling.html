@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Events Form Validation</title>
+    <style>
+
+        input {
+            padding: 8px;
+            margin-bottom: 5px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .error { font-size: 14px; }
+        .success { font-size: 14px; }
+
+        /* Username */
+        .username-error {
+            border: 2px solid red;
+            background-color: #ffe6e6;
+        }
+        .username-success {
+            border: 2px solid green;
+            background-color: #e6ffe6;
+        }
+
+        /* Email */
+        .email-error {
+            border: 2px solid orange;
+            background-color: #fff0e6;
+        }
+        .email-success {
+            border: 2px solid darkgreen;
+            background-color: #e6fff2;
+        }
+
+        /* Password */
+        .password-error {
+            border: 2px solid purple;
+            background-color: #f3e6ff;
+        }
+        .password-success {
+            border: 2px solid blue;
+            background-color: #e6f0ff;
+        }
+
+        /* Phone */
+        .phone-error {
+            border: 2px dashed red;
+            background-color: #ffe6f2;
+        }
+        .phone-success {
+            border: 2px dashed green;
+            background-color: #e6fff9;
+        }
+
+        /* Age */
+        .age-error {
+            border: 2px double red;
+            background-color: #fff5e6;
+        }
+        .age-success {
+            border: 2px double green;
+            background-color: #f0ffe6;
+        }
+
+    </style>
+</head>
+<body>
+
+<h2>Complete Event-Based Form (Custom Styling)</h2>
+
+<form id="myForm">
+
+Username:
+<input type="text" id="username">
+<span id="userError" class="error"></span>
+<br><br>
+
+Email:
+<input type="text" id="email">
+<span id="emailError" class="error"></span>
+<br><br>
+
+Password:
+<input type="password" id="password">
+<span id="passError" class="error"></span>
+<br><br>
+
+Phone:
+<input type="text" id="phone">
+<span id="phoneError" class="error"></span>
+<br><br>
+
+Age:
+<input type="number" id="age">
+<span id="ageError" class="error"></span>
+<br><br>
+
+<input type="submit">
+
+</form>
+
+<script>
+
+// USERNAME
+let username = document.getElementById("username");
+username.addEventListener("keyup", function() {
+
+    if (this.value.length < 3) {
+        this.className = "username-error";
+        userError.textContent = "Minimum 3 characters required";
+        userError.style.color = "red";
+    } else {
+        this.className = "username-success";
+        userError.textContent = "Looks good!";
+        userError.style.color = "green";
+    }
+
+});
+
+// EMAIL
+let email = document.getElementById("email");
+email.addEventListener("blur", function() {
+
+    let pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+    if (!pattern.test(this.value)) {
+        this.className = "email-error";
+        emailError.textContent = "Invalid Email";
+        emailError.style.color = "orange";
+    } else {
+        this.className = "email-success";
+        emailError.textContent = "Valid Email";
+        emailError.style.color = "green";
+    }
+
+});
+
+// PASSWORD
+let password = document.getElementById("password");
+password.addEventListener("input", function() {
+
+    if (this.value.length < 6) {
+        this.className = "password-error";
+        passError.textContent = "Min 6 characters";
+        passError.style.color = "purple";
+    } else {
+        this.className = "password-success";
+        passError.textContent = "Strong Password";
+        passError.style.color = "blue";
+    }
+
+});
+
+// PHONE
+let phone = document.getElementById("phone");
+phone.addEventListener("change", function() {
+
+    let phonePattern = /^[0-9]{10}$/;
+
+    if (!phonePattern.test(this.value)) {
+        this.className = "phone-error";
+        phoneError.textContent = "10 digit required";
+        phoneError.style.color = "red";
+    } else {
+        this.className = "phone-success";
+        phoneError.textContent = "Valid Number";
+        phoneError.style.color = "green";
+    }
+
+});
+
+// AGE
+let age = document.getElementById("age");
+age.addEventListener("input", function() {
+
+    if (this.value < 18 || this.value > 60) {
+        this.className = "age-error";
+        ageError.textContent = "Age 18-60 only";
+        ageError.style.color = "red";
+    } else {
+        this.className = "age-success";
+        ageError.textContent = "Valid Age";
+        ageError.style.color = "green";
+    }
+
+});
+
+// FORM SUBMIT
+document.getElementById("myForm")
+.addEventListener("submit", function(event) {
+    event.preventDefault();
+    alert("Form Submitted Successfully!");
+});
+
+</script>
+
+</body>
+</html>

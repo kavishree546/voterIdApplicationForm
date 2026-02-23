@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Input Attributes Practice</title>
+</head>
+<body>
+
+<h2>Practice – HTML Input Attributes</h2>
+
+<form action="#" method="post" autocomplete="on">
+
+<!-- placeholder -->
+Name (placeholder):
+<input type="text" placeholder="Enter your name">
+<br><br>
+
+<!-- required -->
+Email (required):
+<input type="email" required>
+<br><br>
+
+<!-- maxlength / minlength -->
+Username (min 3, max 8 chars):
+<input type="text" minlength="3" maxlength="8">
+<br><br>
+
+<!-- size -->
+Short Text Box (size 10):
+<input type="text" size="100">
+<br><br>
+
+<!-- value -->
+Default Value:
+<input type="text" value="Hello Student">
+<br><br>
+
+<!-- readonly -->
+Readonly Field:
+<input type="text" value="Cannot edit" readonly>
+<br><br>
+
+<!-- disabled -->
+Disabled Field:
+<input type="text" value="Disabled input" disabled>
+<br><br>
+
+<!-- min / max -->
+Age (18–60):
+<input type="number" min="18" max="60">
+<br><br>
+
+<!-- step -->
+Weight (step 0.5):
+<input type="number" step="0.5">
+<br><br>
+
+<!-- pattern -->
+Phone (10 digits pattern):
+<input type="tel" pattern="[0-9]{10}">
+<br><br>
+
+<!-- autocomplete off -->
+Search (autocomplete off):
+<input type="search" autocomplete="on">
+<br><br>
+
+<!-- autofocus -->
+Autofocus Example:
+<input type="text" autofocus>
+<br><br>
+
+<!-- multiple -->
+Upload Multiple Files:
+<input type="file" multiple>
+<br><br>
+
+<!-- accept -->
+Upload Images Only:
+<input type="file" accept="image/*">
+<br><br>
+
+<!-- checked -->
+Checkbox Default Checked:
+<input type="checkbox" checked> Option selected
+<br><br>
+
+<!-- radio checked -->
+Gender:
+<input type="radio" name="g" checked> Male
+<input type="radio" name="g"> Female
+<br><br>
+
+<!-- list (datalist) -->
+Choose Browser:
+<input list="browsers">
+<datalist id="browsers">
+  <option value="Chrome">
+  <option value="Firefox">
+  <option value="Edge">
+</datalist>
+<br><br>
+
+<!-- formaction -->
+<input type="submit" value="Submit Normally">
+<input type="submit" value="Submit Elsewhere" formaction="#">
+<br><br>
+
+<!-- formenctype -->
+<input type="submit" value="Multipart Submit"
+       formenctype="multipart/form-data">
+<br><br>
+
+<!-- formmethod -->
+<input type="submit" value="GET Submit" formmethod="get">
+<br><br>
+
+<!-- formnovalidate -->
+<input type="submit" value="Submit Without Validation" formnovalidate>
+<br><br>
+
+<!-- height / width (image input) -->
+Image Button:
+<input type="image"
+       src="https://via.placeholder.com/60"
+       height="60" width="60">
+<br><br>
+
+<!-- name attribute -->
+Named Field:
+<input type="text" name="studentName">
+<br><br>
+
+<!-- hidden -->
+<input type="hidden" value="hiddenInfo">
+
+<!-- reset & submit -->
+<input type="reset">
+<input type="submit">
+
+</form>
+
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Advanced JS Validation</title>
+    <style>
+        .error { color: red; }
+        .success { color: green; }
+    </style>
+</head>
+<body>
+
+<h2>Advanced Form Validation</h2>
+
+<form id="myForm">
+
+Username:
+<input type="text" id="username">
+<span id="userError" class="error"></span>
+<br><br>
+
+Email:
+<input type="text" id="email">
+<span id="emailError" class="error"></span>
+<br><br>
+
+Password:
+<input type="password" id="password">
+<span id="passError" class="error"></span>
+<br><br>
+
+Confirm Password:
+<input type="password" id="confirmPassword">
+<span id="confirmError" class="error"></span>
+<br><br>
+
+Phone:
+<input type="text" id="phone">
+<span id="phoneError" class="error"></span>
+<br><br>
+
+Age:
+<input type="number" id="age">
+<span id="ageError" class="error"></span>
+<br><br>
+
+<input type="submit" value="Submit">
+
+</form>
+
+<script>
+
+document.getElementById("myForm").addEventListener("submit", function(event) {
+
+    let valid = true;
+
+    // Clear previous errors
+    document.querySelectorAll(".error").forEach(e => e.textContent = "");
+
+    // Username Validation
+    let username = document.getElementById("username").value;
+    if (username.length < 3 || username.length > 10) {
+        document.getElementById("userError").textContent =
+            "Username must be 3-10 characters.";
+        valid = false;
+    }
+
+    // Email Validation
+    let email = document.getElementById("email").value;
+    let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    if (!emailPattern.test(email)) {
+        document.getElementById("emailError").textContent =
+            "Enter valid email.";
+        valid = false;
+    }
+
+    // Password Validation (Strong)
+    let password = document.getElementById("password").value;
+    let strongPass = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{6,}$/;
+    if (!strongPass.test(password)) {
+        document.getElementById("passError").textContent =
+            "Password must contain 1 capital, 1 number, 1 special character.";
+        valid = false;
+    }
+
+    // Confirm Password
+    let confirmPassword = document.getElementById("confirmPassword").value;
+    if (password !== confirmPassword) {
+        document.getElementById("confirmError").textContent =
+            "Passwords do not match.";
+        valid = false;
+    }
+
+    // Phone Validation
+    let phone = document.getElementById("phone").value;
+    let phonePattern = /^[0-9]{10}$/;
+    if (!phonePattern.test(phone)) {
+        document.getElementById("phoneError").textContent =
+            "Enter 10 digit phone number.";
+        valid = false;
+    }
+
+    // Age Validation
+    let age = document.getElementById("age").value;
+    if (age < 18 || age > 60) {
+        document.getElementById("ageError").textContent =
+            "Age must be between 18 and 60.";
+        valid = false;
+    }
+
+    if (!valid) {
+        event.preventDefault(); // Stop form submission
+    }
+
+});
+
+</script>
+
+</body>
+</html>
