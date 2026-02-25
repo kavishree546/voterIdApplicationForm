@@ -15,32 +15,32 @@
 <form id="myForm">
 
 Username:
-<input type="text" id="username">
+<input type="text" id="username" required>
 <span id="userError" class="error"></span>
 <br><br>
 
 Email:
-<input type="text" id="email">
+<input type="text" id="email" required>
 <span id="emailError" class="error"></span>
 <br><br>
 
 Password:
-<input type="password" id="password">
+<input type="password" id="password" required>
 <span id="passError" class="error"></span>
 <br><br>
 
 Confirm Password:
-<input type="password" id="confirmPassword">
+<input type="password" id="confirmPassword" required>
 <span id="confirmError" class="error"></span>
 <br><br>
 
 Phone:
-<input type="text" id="phone">
+<input type="text" id="phone" required>
 <span id="phoneError" class="error"></span>
 <br><br>
 
 Age:
-<input type="number" id="age">
+<input type="number" id="age" required>
 <span id="ageError" class="error"></span>
 <br><br>
 
@@ -51,6 +51,7 @@ Age:
 <script>
 
 // USERNAME EVENTS
+let valid=true;
 let username = document.getElementById("username");
 
 username.addEventListener("focus", function() {
@@ -67,6 +68,7 @@ username.addEventListener("keydown", function() {
 
 username.addEventListener("keyup", function() {
     if (this.value.length < 3) {
+        valid=false;
         document.getElementById("userError").textContent =
         "Minimum 3 characters required";
     } else {
@@ -94,9 +96,11 @@ document.getElementById("email")
     let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
 
     if (!emailPattern.test(this.value)) {
+        valid=false;
         document.getElementById("emailError").textContent =
         "Enter valid email";
     } else {
+        valid=true;
         document.getElementById("emailError").textContent = "";
     }
 
@@ -108,9 +112,11 @@ document.getElementById("password")
 .addEventListener("input", function() {
 
     if (this.value.length < 6) {
+        valid=false;
         document.getElementById("passError").textContent =
         "Password must be at least 6 characters";
     } else {
+        valid=true;
         document.getElementById("passError").textContent = "";
     }
 
@@ -124,9 +130,11 @@ document.getElementById("confirmPassword")
     let password = document.getElementById("password").value;
 
     if (this.value !== password) {
+        valid=false;
         document.getElementById("confirmError").textContent =
         "Passwords do not match";
     } else {
+        valid=true;
         document.getElementById("confirmError").textContent = "";
     }
 
@@ -140,9 +148,11 @@ document.getElementById("phone")
     let phonePattern = /^[0-9]{10}$/;
 
     if (!phonePattern.test(this.value)) {
+        valid=false;
         document.getElementById("phoneError").textContent =
         "Enter 10 digit phone number";
     } else {
+        valid=true
         document.getElementById("phoneError").textContent = "";
     }
 
@@ -154,9 +164,11 @@ document.getElementById("age")
 .addEventListener("input", function() {
 
     if (this.value < 18 || this.value > 60) {
+        valid=false;
         document.getElementById("ageError").textContent =
         "Age must be between 18 and 60";
     } else {
+        valid=true;
         document.getElementById("ageError").textContent = "";
     }
 
@@ -174,7 +186,21 @@ document.getElementById("submitBtn")
 document.getElementById("myForm")
 .addEventListener("submit", function(event) {
 
-    alert("Form Submitted Successfully!");
+   let valid = true;
+
+    if(username.value.length < 3) valid = false;
+    if(password.value.length < 6) valid = false;
+    if(confirmPassword.value !== password.value) valid = false;
+    if(!/^[0-9]{10}$/.test(phone.value)) valid = false;
+    if(age.value < 18 || age.value > 60) valid = false;
+    if(!/^[^ ]+@[^ ]+\.[a-z]{2,3}$/.test(email.value)) valid = false;
+
+    if(!valid){
+        event.preventDefault();
+        alert("Fix errors before submitting");
+    } else {
+        alert("Form Submitted Successfully!");
+    }
 
 });
 
